@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks'
-import PlanningCreator from './PlanningCreator'
+import PlanningCreator from './planning-creator'
 
 function Splash() {
 	const [isOpenCreator, setIsOpenCreator] = useState(false)
@@ -7,10 +7,10 @@ function Splash() {
 	if (isOpenCreator) return <PlanningCreator />
 
 	return (
-		<div>
+		<main>
 			<h1>Poker planning</h1>
 			<button onClick={() => setIsOpenCreator(true)}>create</button>
-		</div>
+		</main>
 	)
 }
 
