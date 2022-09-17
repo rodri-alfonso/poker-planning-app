@@ -1,7 +1,8 @@
 import Layout from './components/Layout'
 import { Switch, Route, Redirect } from 'wouter-preact'
 import Home from './pages/Home'
-import Splash from './pages/Splash'
+import Landing from './pages/Landing'
+import { useState } from 'preact/hooks'
 
 const PrivateRouter = () => {
 	return (
@@ -13,7 +14,14 @@ const PrivateRouter = () => {
 }
 
 export function App() {
-	const isAuth = false
+	const [auth, setAuth] = useState(false)
 
-	return <Layout>{isAuth ? <PrivateRouter /> : <Splash />}</Layout>
+	if (!auth) return <Landing />
+
+	return (
+		<Layout>
+			<button onClick={() => setAuth(true)}>click me</button>
+			<PrivateRouter />
+		</Layout>
+	)
 }
