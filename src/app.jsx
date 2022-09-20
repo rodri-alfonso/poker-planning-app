@@ -1,13 +1,15 @@
 import Layout from './components/Layout'
 import { Switch, Route, Redirect } from 'wouter-preact'
-import Home from './pages/Home'
+import Planning from './pages/Planning'
 import Landing from './pages/Landing'
 import { useAuth } from './hooks/use-auth'
+import Home from './pages/Home'
 
 const PrivateRouter = () => {
 	return (
 		<Switch>
-			<Route path='/:planningId' component={Home} />
+			<Route path='/planning/:id' component={Planning} />
+			<Route path='/' component={Home} />
 			<Redirect to='/' />
 		</Switch>
 	)
@@ -23,7 +25,12 @@ const PublicRouter = () => {
 }
 
 export function App() {
-	const { auth } = useAuth()
+	const { auth, signOut } = useAuth()
 
-	return <Layout>{auth ? <PrivateRouter /> : <PublicRouter />}</Layout>
+	return (
+		<Layout>
+			<button onClick={signOut}>Logout</button>
+			{auth ? <PrivateRouter /> : <PublicRouter />}
+		</Layout>
+	)
 }

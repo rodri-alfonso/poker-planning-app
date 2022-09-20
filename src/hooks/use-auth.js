@@ -18,6 +18,7 @@ export function useAuth() {
 
 	function signOut() {
 		clearStorage()
+		auth.value = null
 	}
 
 	return { auth: storage, signIn, signOut }

@@ -1,12 +1,14 @@
 import { useState } from 'preact/hooks'
 import Modal from '../../components/Modal'
 import { useAuth } from '../../hooks/use-auth'
+import { useLocation } from 'wouter-preact'
 
 const mockTypes = [{ name: 'Fibonacci' }, { name: 'Custom Devs' }]
 
 function PlanningCreator({ onBack }) {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const { signIn } = useAuth()
+	const [_, setLocation] = useLocation()
 
 	const Types = ({ types }) => {
 		return (
@@ -25,6 +27,7 @@ function PlanningCreator({ onBack }) {
 
 	function handleCreate() {
 		signIn('lalal')
+		setLocation('/planning/laksdaslkd')
 	}
 
 	return (
