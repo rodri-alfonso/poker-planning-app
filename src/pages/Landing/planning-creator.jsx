@@ -1,34 +1,41 @@
 import { useState } from 'preact/hooks'
 import Modal from '../../components/Modal'
-import { useRoute } from 'wouter-preact'
+import { Link, useLocation } from 'wouter-preact'
 
 const mockTypes = [{ name: 'Fibonacci' }, { name: 'Custom Devs' }]
 
-function PlanningCreator() {
+function PlanningCreator({ onBack }) {
 	const [isModalOpen, setIsModalOpen] = useState(false)
-	const router = useRoute()
+	const [location, setLocation] = useLocation()
 
 	const Types = ({ types }) => {
 		return (
-			<section>
+			<section style={{ display: 'flex', gap: '10px' }}>
 				{types.map((type) => (
-					<button key={type.name}>{type.name}</button>
+					<button className='bg-purple' key={type.name}>
+						{type.name}
+					</button>
 				))}
-				<button onClick={() => setIsModalOpen(true)}>+</button>
+				<button className='bg-purple p-2' onClick={() => setIsModalOpen(true)}>
+					+
+				</button>
 			</section>
 		)
 	}
 
 	function handleCreate() {
 		//set the auth here
-		router.push('/')
+		// create collection from firebase
+		const planning = { id: 'askjdaskjdh' }
+		setLocation(`/${planning.id}`)
 	}
 
 	return (
 		<div>
+			<button onClick={onBack}>cancel</button>
+			<Modal onClose={() => setIsModalOpen(false)} isOpen={isModalOpen} />
 			<Types types={mockTypes} />
 			<button onClick={handleCreate}>Create</button>
-			{isModalOpen && <Modal />}
 		</div>
 	)
 }

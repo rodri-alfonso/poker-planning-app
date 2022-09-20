@@ -7,8 +7,8 @@ import { useState } from 'preact/hooks'
 const PrivateRouter = () => {
 	return (
 		<Switch>
-			<Route path='/' component={Home} />
-			<Redirect to='/' />
+			<Route path='/:planningId' component={Home} />
+			{/* <Redirect to='/' /> */}
 		</Switch>
 	)
 }
