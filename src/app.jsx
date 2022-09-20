@@ -8,7 +8,16 @@ const PrivateRouter = () => {
 	return (
 		<Switch>
 			<Route path='/:planningId' component={Home} />
-			{/* <Redirect to='/' /> */}
+			<Redirect to='/' />
+		</Switch>
+	)
+}
+
+const PublicRouter = () => {
+	return (
+		<Switch>
+			<Route path='/' component={Landing} />
+			<Redirect to='/' />
 		</Switch>
 	)
 }
@@ -16,12 +25,5 @@ const PrivateRouter = () => {
 export function App() {
 	const [auth, setAuth] = useState(false)
 
-	if (!auth) return <Landing />
-
-	return (
-		<Layout>
-			<button onClick={() => setAuth(true)}>click me</button>
-			<PrivateRouter />
-		</Layout>
-	)
+	return <Layout>{auth ? <PrivateRouter /> : <PublicRouter />}</Layout>
 }
