@@ -1,23 +1,24 @@
 import { useLocalStorage } from './use-local-storage'
-import { useState } from 'preact/hooks'
 import { useId } from 'preact/hooks'
+import { auth } from '../signals/auth'
 
 export function useAuth() {
-	const { localStore, clearStorage } = useLocalStorage('planning-poker-dev')
-	const [auth, setAuth] = useState(() => localStore)
-
+	const { storage, clearStorage, setStorage } = useLocalStorage('planning-poker-dev', auth.value)
 	const userId = useId()
 
 	function signIn(userName) {
-		setAuth({
+		const payload = {
 			id: userId,
 			displayName: userName,
-		})
+		}
+
+		auth.value = payload
+		setStorage(payload)
 	}
 
 	function signOut() {
 		clearStorage()
 	}
 
-	return { auth, signIn, signOut }
+	return { auth: storage, signIn, signOut }
 }

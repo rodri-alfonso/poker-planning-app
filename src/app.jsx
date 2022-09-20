@@ -2,7 +2,7 @@ import Layout from './components/Layout'
 import { Switch, Route, Redirect } from 'wouter-preact'
 import Home from './pages/Home'
 import Landing from './pages/Landing'
-import { useState } from 'preact/hooks'
+import { useAuth } from './hooks/use-auth'
 
 const PrivateRouter = () => {
 	return (
@@ -23,7 +23,7 @@ const PublicRouter = () => {
 }
 
 export function App() {
-	const [auth, setAuth] = useState(false)
+	const { auth } = useAuth()
 
 	return <Layout>{auth ? <PrivateRouter /> : <PublicRouter />}</Layout>
 }
