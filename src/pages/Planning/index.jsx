@@ -2,8 +2,6 @@ import EstimatesList from '../../components/Planning/EstimatesList'
 import VotersList from '../../components/Planning/VotersList'
 
 function Planning() {
-	//cuando te estes por salir de la ventana, que te pregunte si queres terminar la sesion de planning
-
 	//this should be in a collection
 	const cardsListMock = [0, 1, 2, 3, 5, 8, 13, 21]
 

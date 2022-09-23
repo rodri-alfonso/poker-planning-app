@@ -2,12 +2,13 @@ import { useState } from 'preact/hooks'
 import Modal from '../../components/Modal'
 import { useAuth } from '../../hooks/use-auth'
 import { useLocation } from 'wouter-preact'
+import Input from '../../components/Input'
 
 const mockTypes = [{ name: 'Fibonacci' }, { name: 'Custom Devs' }]
 
-function PlanningCreator({ onBack }) {
+function Creator() {
 	const [isModalOpen, setIsModalOpen] = useState(false)
-	const { signIn } = useAuth()
+	const { signIn, auth } = useAuth()
 	const [_, setLocation] = useLocation()
 
 	const Types = ({ types }) => {
@@ -18,9 +19,7 @@ function PlanningCreator({ onBack }) {
 						{type.name}
 					</button>
 				))}
-				<button className='bg-purple p-2' onClick={() => setIsModalOpen(true)}>
-					+
-				</button>
+				<button className='bg-purple p-2'>+</button>
 			</section>
 		)
 	}
@@ -32,12 +31,16 @@ function PlanningCreator({ onBack }) {
 
 	return (
 		<div>
-			<button onClick={onBack}>cancel</button>
-			<Modal onClose={() => setIsModalOpen(false)} isOpen={isModalOpen} />
+			<Modal onClose={() => setIsModalOpen(false)} isOpen={isModalOpen}>
+				<div>holii</div>
+				<button onClick={handleCreate}>Crear</button>
+				<Input placeholder='holiii' />
+			</Modal>
 			<Types types={mockTypes} />
-			<button onClick={handleCreate}>Create</button>
+			<Input placeholder='Add the name of the Planning' />
+			<button onClick={() => (!auth ? setIsModalOpen(true) : handleCreate())}>Create</button>
 		</div>
 	)
 }
 
-export default PlanningCreator
+export default Creator
