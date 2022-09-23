@@ -32,7 +32,7 @@ export function App() {
 
 	return (
 		<Layout>
-			<button onClick={signOut}>Logout</button>
+			{auth && <button onClick={signOut}>Logout</button>}
 			{auth ? <PrivateRouter /> : <PublicRouter />}
 		</Layout>
 	)

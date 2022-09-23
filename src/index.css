@@ -4,5 +4,9 @@
 
 body {
 	margin: 0;
+	width: 100%;
+	padding: 16px;
 	height: 100vh;
+	display: grid;
+	place-items: center;
 }

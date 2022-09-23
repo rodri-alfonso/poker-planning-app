@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@preact/signals": "^1.0.4",
+		"daisyui": "^2.31.0",
 		"firebase": "^9.10.0",
 		"preact": "^10.10.6",
 		"wouter-preact": "^2.8.0-alpha.2"

@@ -1,25 +1,38 @@
 import { useState } from 'preact/hooks'
 import Modal from '../../components/Modal'
 import { useAuth } from '../../hooks/use-auth'
-import { useLocation } from 'wouter-preact'
+import { Link, useLocation } from 'wouter-preact'
 import Input from '../../components/Input'
 
 const mockTypes = [{ name: 'Fibonacci' }, { name: 'Custom Devs' }]
 
 function Creator() {
 	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [planing, setPlaning] = useState('')
 	const { signIn, auth } = useAuth()
 	const [_, setLocation] = useLocation()
 
-	const Types = ({ types }) => {
+	const Type = ({ text, onClick, isSelected }) => {
+		function handleClick() {
+			if (onClick) onClick()
+		}
+
 		return (
-			<section style={{ display: 'flex', gap: '10px' }}>
-				{types.map((type) => (
-					<button className='bg-purple' key={type.name}>
-						{type.name}
-					</button>
+			<button onClick={handleClick} className={`btn ${isSelected ? 'btn-active' : ''}`}>
+				{text}
+			</button>
+		)
+	}
+
+	const Types = ({ types }) => {
+		const [indexType, setIndexType] = useState(0)
+
+		return (
+			<section className='btn-group btn-group-vertical lg:btn-group-horizontal'>
+				{types.map((type, index) => (
+					<Type key={type.name} text={type.name} onClick={() => setIndexType(index)} isSelected={indexType === index} />
 				))}
-				<button className='bg-purple p-2'>+</button>
+				<button className='btn'>+</button>
 			</section>
 		)
 	}
@@ -30,15 +43,25 @@ function Creator() {
 	}
 
 	return (
-		<div>
+		<div className='grid gap-10'>
 			<Modal onClose={() => setIsModalOpen(false)} isOpen={isModalOpen}>
 				<div>holii</div>
 				<button onClick={handleCreate}>Crear</button>
 				<Input placeholder='holiii' />
 			</Modal>
-			<Types types={mockTypes} />
-			<Input placeholder='Add the name of the Planning' />
-			<button onClick={() => (!auth ? setIsModalOpen(true) : handleCreate())}>Create</button>
+			<div className='flex gap-5'>
+				<Link href='/'>
+					<a className='btn btn-ghost btn-active'>volver</a>
+				</Link>
+				<Types types={mockTypes} />
+			</div>
+
+			<div className='flex gap-4'>
+				<Input placeholder='Type a planing name' value={planing} onChange={(e) => setPlaning(e.target.value)} />
+				<button disabled={!planing} className='btn' onClick={() => (!auth ? setIsModalOpen(true) : handleCreate())}>
+					Create
+				</button>
+			</div>
 		</div>
 	)
 }
