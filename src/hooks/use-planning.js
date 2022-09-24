@@ -39,7 +39,7 @@ export function usePlannings() {
 				//revisar esto
 				let planningsList = []
 				docs.forEach((doc) => {
-					planningsList.push(doc.data())
+					planningsList.push({ ...doc.data(), id: doc.id })
 				})
 
 				setResponse({

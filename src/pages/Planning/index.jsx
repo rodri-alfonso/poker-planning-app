@@ -27,9 +27,6 @@ function Planning() {
 
 	return (
 		<main className='grid grid-cols-3'>
-			<button className='btn' onClick={() => setLocation('/')}>
-				Back
-			</button>
 			<Cards />
 			<VotersList />
 			<EstimatesList />

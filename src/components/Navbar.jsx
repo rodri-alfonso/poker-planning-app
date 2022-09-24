@@ -1,11 +1,13 @@
 import { Link } from 'wouter-preact'
 import { useAuth } from '../hooks/use-auth'
+import { useLocation } from 'wouter-preact'
 
 export default function Navbar() {
 	const { signOut } = useAuth()
+	const [location, setLocation] = useLocation()
 
 	return (
-		<div className='navbar bg-base-100'>
+		<header className='navbar bg-base-100'>
 			<div className='navbar-start'>
 				<div className='dropdown'>
 					<label tabIndex={0} className='btn btn-ghost lg:hidden'>
@@ -50,7 +52,9 @@ export default function Navbar() {
 						</li>
 					</ul>
 				</div>
-				<a className='btn btn-ghost normal-case text-xl'>daisyUI</a>
+				<Link href='/'>
+					<a className='btn btn-ghost normal-case text-xl'>volver</a>
+				</Link>
 			</div>
 
 			<div className='navbar-end flex gap-4'>
@@ -62,6 +66,6 @@ export default function Navbar() {
 					<a className='btn btn-primary'>Create planning</a>
 				</Link>
 			</div>
-		</div>
+		</header>
 	)
 }

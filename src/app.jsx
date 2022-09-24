@@ -5,6 +5,7 @@ import Landing from './pages/Landing'
 import { useAuth } from './hooks/use-auth'
 import Home from './pages/Home'
 import Creator from './pages/Creator'
+import Navbar from './components/Navbar'
 
 const PrivateRouter = () => {
 	return (

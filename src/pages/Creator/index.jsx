@@ -15,11 +15,14 @@ function Creator() {
 
 	function handleCreate() {
 		setIsLoading(true)
+		if (!auth) signIn(username)
 
 		addPlanning({
-			name: planning,
+			room_name: planning,
+			intial_date: Date().toString(),
+			estimates: [],
+			voters: [],
 		}).then((doc) => {
-			if (!auth) signIn(username)
 			setLocation(`/planning/${doc.id}`)
 			setIsLoading(false)
 		})
