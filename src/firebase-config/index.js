@@ -2,6 +2,8 @@ import { initializeApp, getApp, getApps } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { environments } from '../lib/constants'
 
+import { collection } from 'firebase/firestore'
+
 const firebaseConfig = {
 	apiKey: environments.FIREBASE_CONFIG_API_KEY,
 	authDomain: environments.FIREBASE_CONFIG_AUTH_DOMAIN,
@@ -14,4 +16,9 @@ const firebaseConfig = {
 const app = !getApps.length ? initializeApp(firebaseConfig) : getApp()
 const db = getFirestore()
 
-export { app, db }
+const collections = {
+	PLANNING_COLLECTION: collection(db, 'planning-tables'),
+	SYSTEMS_COLLECTION: collection(db, 'voting-systems'),
+}
+
+export { app, db, collections }
