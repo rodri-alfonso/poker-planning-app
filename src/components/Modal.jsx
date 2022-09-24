@@ -1,17 +1,45 @@
-function Modal({ isOpen, onClose, children }) {
-	if (!isOpen) return
-
+export default function Modal({
+	onClickPrimary,
+	onClickSecondary,
+	labelPrimary,
+	labelSecondary,
+	disabledPrimary,
+	label,
+	title,
+	disabledLabel,
+	description,
+	children,
+}) {
 	return (
-		<dialog
-			className='bg-gray-dark bg-opacity-60 grid place-items-center right-0 top-0 left-0 bottom-0 w-full h-full'
-			open={isOpen}
-		>
-			<div className='bg-gray-light rounded-md p-5 max-w-md z-10'>
-				{children}
-				<button onClick={onClose}>Close</button>
+		<>
+			<label disabled={disabledLabel} htmlFor='my-modal' className='btn modal-button'>
+				{label}
+			</label>
+
+			<input type='checkbox' id='my-modal' className='modal-toggle' />
+			<div className='modal'>
+				<div className='modal-box'>
+					{title && <h3 className='font-bold text-lg'>{title}</h3>}
+					{description && <p className='py-4'>{description}</p>}
+					<div className='pt-6'>{children}</div>
+					<div className='modal-action'>
+						{labelSecondary && (
+							<label onClick={onClickSecondary} htmlFor='my-modal' className='btn'>
+								{labelSecondary}
+							</label>
+						)}
+						<label onClick={onClickPrimary} disabled={disabledPrimary} htmlFor='my-modal' className='btn btn-primary'>
+							{labelPrimary}
+						</label>
+					</div>
+				</div>
 			</div>
-		</dialog>
+		</>
 	)
 }
 
-export default Modal
+/*
+
+
+
+*/

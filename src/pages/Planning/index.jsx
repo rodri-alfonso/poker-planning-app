@@ -1,5 +1,5 @@
-import EstimatesList from '../../components/Planning/EstimatesList'
-import VotersList from '../../components/Planning/VotersList'
+import EstimatesList from '../../components/EstimatesList'
+import VotersList from '../../components/VotersList'
 
 function Planning() {
 	//this should be in a collection
