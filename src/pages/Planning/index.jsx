@@ -1,9 +1,15 @@
 import EstimatesList from '../../components/EstimatesList'
 import VotersList from '../../components/VotersList'
-import { useLocation } from 'wouter-preact'
+import { useLocation, useRoute } from 'wouter-preact'
+import { usePlanning } from '../../hooks/use-planning'
 
 function Planning() {
-	const [_, setLocation] = useLocation()
+	const [, setLocation] = useLocation()
+	const [, params] = useRoute('/planning/:planningId')
+
+	const response = usePlanning(params.planningId)
+	console.log('🚀 ~ file: index.jsx ~ line 10 ~ response', response)
+
 	//this should be in a collection
 	const cardsListMock = [0, 1, 2, 3, 5, 8, 13, 21]
 

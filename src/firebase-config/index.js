@@ -2,7 +2,7 @@ import { initializeApp, getApp, getApps } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { environments } from '../lib/constants'
 
-import { collection } from 'firebase/firestore'
+import { collection, doc } from 'firebase/firestore'
 
 const firebaseConfig = {
 	apiKey: environments.FIREBASE_CONFIG_API_KEY,
@@ -21,4 +21,8 @@ const collections = {
 	SYSTEMS_COLLECTION: collection(db, 'voting-systems'),
 }
 
-export { app, db, collections }
+const documents = {
+	PLANNING_DOCUMENT_BY_ID: (planningId) => doc(db, 'planning-tables', planningId),
+}
+
+export { app, db, collections, documents }
