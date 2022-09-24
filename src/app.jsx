@@ -28,12 +28,7 @@ const PublicRouter = () => {
 }
 
 export function App() {
-	const { auth, signOut } = useAuth()
+	const { auth } = useAuth()
 
-	return (
-		<Layout>
-			{auth && <button onClick={signOut}>Logout</button>}
-			{auth ? <PrivateRouter /> : <PublicRouter />}
-		</Layout>
-	)
+	return <Layout>{auth ? <PrivateRouter /> : <PublicRouter />}</Layout>
 }

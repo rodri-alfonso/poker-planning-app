@@ -1,11 +1,12 @@
 import { useLocation } from 'wouter-preact'
+import Navbar from '../../components/Navbar'
 
 function Home() {
 	const [_, setLocation] = useLocation()
 
 	return (
 		<main>
-			<div>This is a banner</div>
+			<Navbar />
 
 			<section>
 				<h1>Live plannings</h1>
