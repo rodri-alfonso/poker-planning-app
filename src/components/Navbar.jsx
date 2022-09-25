@@ -53,7 +53,7 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<Link href='/'>
-					<a className='btn btn-ghost normal-case text-xl'>volver</a>
+					<a className='btn btn-ghost btn-active'>volver</a>
 				</Link>
 			</div>
 

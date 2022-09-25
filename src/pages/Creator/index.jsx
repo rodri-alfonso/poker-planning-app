@@ -1,10 +1,11 @@
 import { useState } from 'preact/hooks'
 import { useAuth } from '../../hooks/use-auth'
-import { Link, useLocation } from 'wouter-preact'
+import { useLocation } from 'wouter-preact'
 import Input from '../../components/Input'
 import SystemsList from '../../components/SystemsList'
 import Modal from '../../components/Modal'
 import { addPlanning } from '../../lib/utils'
+import { useSystem } from '../../hooks/use-system'
 
 function Creator() {
 	const [isLoading, setIsLoading] = useState(false)
@@ -12,6 +13,7 @@ function Creator() {
 	const [username, setUsername] = useState('')
 	const { signIn, auth } = useAuth()
 	const [_, setLocation] = useLocation()
+	const [system] = useSystem()
 
 	function handleCreate() {
 		setIsLoading(true)
@@ -20,8 +22,9 @@ function Creator() {
 		addPlanning({
 			room_name: planning,
 			intial_date: Date().toString(),
+			voting_system: system,
 			estimates: [],
-			voters: [],
+			voters: [auth.displayName],
 		}).then((doc) => {
 			setLocation(`/planning/${doc.id}`)
 			setIsLoading(false)
@@ -32,12 +35,7 @@ function Creator() {
 
 	return (
 		<div className='grid gap-10'>
-			<div className='flex gap-5'>
-				<Link href='/'>
-					<a className='btn btn-ghost btn-active'>volver</a>
-				</Link>
-				<SystemsList />
-			</div>
+			<SystemsList />
 
 			<div className='flex gap-4'>
 				<Input placeholder='Type a planning name' value={planning} onChange={(e) => setPlanning(e.target.value)} />
